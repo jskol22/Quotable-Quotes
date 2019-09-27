@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Edit Quote</title>
+    <style>
+        .messages {
+            color: red;
+        }
+        a {
+            margin-left: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+    <a href="/">Log Out</a>
+    <a href="/quotes">Dashboard</a>
+    <h2>Edit Quote</h2>
+    <div class="editBox">
+        <form action="/edit/{{quote.id}}" method="POST">
+            {% csrf_token %}
+            <h3>Quoted By: <input type="text" name="quoter" id=""></h3>
+            <br>
+            <br>
+            <h3>Message: <input type="text" name="message" id="" style="width: 200px; align-content: top;"></h3>
+            <br>
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+        <form action="/cancel">
+            <input type="submit" value="Cancel" style="margin-right: 200px;">
+        </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quotes</title>
+    <style>
+        body {
+            display: inline-block;
+        }
+
+        .quoteBox {
+            display: inline-block;
+            margin-left: 200px;
+        }
+
+        .favBox {
+            display: inline-block;
+            margin-left: 100px;
+            vertical-align: top;
+            width: 150px;
+        }
+
+        .contributeBox {
+            display: inline-block;
+            margin-left: 100px;
+            vertical-align: top;
+        }
+        .messages {
+            color: red
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Hello, {{loggedinuser.name}} </h1>
+    <a href="logout">Log Out</a>
+    <a href="dashboard">Dashboard</a>
+    <div class="quoteBox">
+        <h3>Quotable Quotes</h3>
+        {% for quote in allQuotes %}
+        {{quote.quoter}}: {{quote.message}}
+        <p>Posted by <a href=user/{{quote.poster.id}}>{{quote.poster.name}}</a></p>
+        <form action="/favorites/{{quote.id}}" method="POST">
+            {% csrf_token %}
+        <input type="submit" value="Add to Favorites">
+        <br>
+        {%if loggedinuser == quote.poster %}
+            <a href=/quotes/{{quote.id}}>Edit</a>
+            <a href=/delete/{{quote.id}}>Delete</a>
+        {% endif %}
+        </form>
+        <br>
+        <br>
+        {% endfor %}
+    </div>
+    <div class="favBox">
+        <h3>Your Favorites</h3>
+        {% for quote in favoriteQuotes %}
+        {{quote.quoter}}: {{quote.message}}
+        <br> 
+        <br>
+        <p>Posted by <a href=user/{{quote.poster.id}}>{{quote.poster.name}}</a></p>
+        <form action="/removefavorites/{{quote.id}}" method="POST">
+            {% csrf_token %}
+        <input type="submit" value="Remove from Favorites">
+        <br>
+        {%if loggedinuser == quote.poster %}
+            <a href=/quotes/{{quote.id}}>Edit</a>
+            <a href=/delete/{{quote.id}}>Delete</a>
+        {% endif %}
+        </form>
+        <br>
+        <br>
+        <br>   
+        
+        {% endfor %}
+     
+    </div>
+    <div class="contributeBox">
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        <p>Contribute a Quote</p>
+        
+        <form action="/add_quote" method="POST">
+            {% csrf_token %}
+            Quoted By: <input type="text" name="quoter" id="">
+            <br>
+            <br>
+            Message: <input type="text" name="message" id="" style="width: 200px; align-content: top;">
+            <br>
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+        
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>User Posts</title>
+</head>
+<body>
+    <a href="/">Log Out</a>
+    <a href="/quotes">Dashboard</a>
+    <br>
+    <br>
+    Posts by: 
+    {{user.name}}
+    <br>
+    <br>
+    Count: {{count}}
+    <br>
+    <br>
+    {% for message in messages %}
+    <p>{{message.quoter}}: {{message.message}}</p>
+    {% endfor %}
+    
+</body>
+</html>

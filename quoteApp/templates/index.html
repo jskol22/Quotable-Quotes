@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+    <style>
+        .form {
+            display: inline-block;
+            margin: 75px;
+        }
+        .messages {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="form">
+        <h1>Register</h1>
+        <form action="/register" method="post">
+            {% csrf_token %}
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="">
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="text" name="email" id="">
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="">
+            </div>
+            <div>
+                <label for="confirm">Confirm Password:</label>
+                <input type="password" name="confirmPassword" id="">
+            </div>
+            <div>
+                <input type="submit" value="Register" id="">
+            </div>
+        </form>
+    </div>
+    <div class="form">
+        <h1>Login</h1>
+        <form action="/login" method="post">
+            {% csrf_token %}
+            <div>
+                <label for="email">Email:</label>
+                <input type="text" name="email" id="">
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="">
+            </div>
+            <div>
+                <input type="submit" value="Login" id="">
+            </div>
+        </form>
+    </div>
+</body>
+</html>
