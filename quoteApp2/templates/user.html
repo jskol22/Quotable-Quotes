@@ -1,26 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>User Posts</title>
+    <style>
+        body {
+            display: inline-block;
+            background-image: url(https://cff2.earth.com/uploads/2019/08/15135811/Microplastics-are-raining-down-on-the-Rocky-Mountains-730x410.jpg);
+            background-size: 100%;
+        }
+
+        a {
+            margin-left: 30px;
+            vertical-align: top;
+            text-align: center;
+            background-color: #e2e5ea;
+            font-size: 20px;
+        }
+        .userPosts {
+            text-align: center;
+            display: inline-block;
+            margin-bottom: 75px;
+            margin-left: 550px;
+            margin-right: 75px;
+            margin-top: 150px;
+            width: 400px;
+            border: solid;
+            padding: 15px;
+            background-color: #e2e5ea;
+        }
+    </style>
+
 </head>
+
 <body>
     <a href="/">Log Out</a>
     <a href="/quotes">Dashboard</a>
     <br>
     <br>
-    Posts by: 
-    {{user.name}}
-    <br>
-    <br>
-    Count: {{count}}
-    <br>
-    <br>
-    {% for message in messages %}
-    <p>{{message.quoter}}: {{message.message}}</p>
-    {% endfor %}
-    
+    <div class="userPosts">
+        <span style="font-size: 30px;">Posts by</span>
+        <span style="font-size: 30px; font-weight: bold;">{{user.name}}</span>
+        <br>
+        <br>
+        <span style="font-weight: bold;">Count:</span> {{count}}
+        <br>
+        <br>
+        {% for message in messages %}
+        <span style="font-weight: bold;">{{message.quoter}}:</span> <p>"{{message.message}}"</p>
+        {% endfor %}
+    </div>
+
 </body>
+
 </html>
