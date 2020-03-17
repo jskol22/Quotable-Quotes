@@ -7,15 +7,62 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
     <style>
-        .form {
+        .title {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 30px;
+        }
+        .container {
+            margin: auto;
+            max-width: 725px;
+        }
+        body {
+            background-image: url(https://media.mnn.com/assets/images/2018/08/CollectionOfCloudsAgainstABlueSky.jpg.653x0_q80_crop-smart.jpg);
+            background-size: 100%;
+        }
+        
+        .register {
+            text-align: center;
             display: inline-block;
-            margin: 75px;
+            margin-bottom: 75px;
+            margin-left: 75px;
+            margin-right: 75px;
+            width: auto;
+            border: solid;
+            padding: 15px;
+            background-color: #e2e5ea;
+        }
+        .login {
+            text-align: center;
+            display: inline-block;
+            margin-bottom: 75px;
+            margin-left: 75px;
+            margin-right: 75px;
+            width: auto;
+            vertical-align: top;
+            border: solid;
+            padding: 15px;
+            background-color: #e2e5ea;
+            height: 330px;
         }
         .messages {
             color: red;
         }
+        h1 {
+            font-family: sans-serif;
+        }
+        form {
+            font-family: sans-serif;
+        }
+        input[type=submit] {
+            border-radius: 5px;
+            background-color: lightblue;
+            font-family: sans-serif;
+            font-weight: bold;
+        }
     </style>
 </head>
+<div class="container">
 <body>
     {% if messages %}
     <ul class="messages">
@@ -24,47 +71,63 @@
         {% endfor %}
     </ul>
     {% endif %}
-    <div class="form">
+    <div class="title">
+        <h1>QUOTABLE QUOTES</h1>
+    </div>
+    <div class="register">
         <h1>Register</h1>
         <form action="/register" method="post">
             {% csrf_token %}
             <div>
                 <label for="name">Name:</label>
+                <br>
                 <input type="text" name="name" id="">
             </div>
+            <br>
             <div>
                 <label for="email">Email:</label>
+                <br>
                 <input type="text" name="email" id="">
             </div>
+            <br>
             <div>
                 <label for="password">Password:</label>
+                <br>
                 <input type="password" name="password" id="">
             </div>
+            <br>
             <div>
                 <label for="confirm">Confirm Password:</label>
+                <br>
                 <input type="password" name="confirmPassword" id="">
             </div>
+            <br>
             <div>
                 <input type="submit" value="Register" id="">
             </div>
         </form>
     </div>
-    <div class="form">
+    <div class="login">
         <h1>Login</h1>
         <form action="/login" method="post">
             {% csrf_token %}
             <div>
                 <label for="email">Email:</label>
+                <br>
                 <input type="text" name="email" id="">
             </div>
+            <br>
             <div>
                 <label for="password">Password:</label>
+                <br>
                 <input type="password" name="password" id="">
             </div>
+            <br>
             <div>
                 <input type="submit" value="Login" id="">
             </div>
         </form>
     </div>
 </body>
+</div>
 </html>
