@@ -1,5 +1,7 @@
-project_name/.gitignore
+Quotable_Quotes/.gitignore
+.vscode
+env/
+venv/
 __pycache__/
 .vscode/
-venv/
 db.sqlite3
