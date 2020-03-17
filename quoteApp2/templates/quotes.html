@@ -9,97 +9,166 @@
     <style>
         body {
             display: inline-block;
+            background-image: url(https://aminus3.s3.amazonaws.com/image/g0007/u00006630/i01403767/d03d26bce0d21f4d1f37fa0aa7920895_large.jpg);
+            background-size: 100%;
+        }
+
+        table {
+            height: 570px;
+            margin-top: 20px;
+            width: 300px;
+            border-collapse: separate;
+            align-content: center;
+            text-align: center;
+            vertical-align: top;
+        }
+
+        td {
+            text-align: center;
+            padding-top: 10px;
+            vertical-align: top;
+        }
+
+        th {
+            border-width: inherit;
+            font-size: 35px;
+            font-weight: bold;
         }
 
         .quoteBox {
+            height: 580px;
+            background-color: #e2e5ea;
             display: inline-block;
-            margin-left: 200px;
+            margin-left: 225px;
+            margin-top: 30px;
+            border: solid;
         }
 
         .favBox {
+            height: 580px;
+            background-color: #e2e5ea;
             display: inline-block;
             margin-left: 100px;
             vertical-align: top;
-            width: 150px;
+            margin-top: 30px;
+            border: solid;
+            align-content: inherit;
         }
 
         .contributeBox {
+            height: 300px;
+            background-color: #e2e5ea;
             display: inline-block;
             margin-left: 100px;
             vertical-align: top;
+            margin-top: 30px;
+            border: solid;
+            align-content: inherit;
+            width: 300px;
+            text-align: center;
+            padding-top: 20px;
         }
+
         .messages {
             color: red
+        }
+
+        .nav {
+            vertical-align: top;
+            margin-left: 730px;
+
+        }
+
+        h1 {
+            margin-left: 675px;
+            font-size: 40px;
+        }
+
+        a {
+            margin: 10px;
         }
     </style>
 </head>
 
 <body>
-    <h1>Hello, {{loggedinuser.name}} </h1>
-    <a href="logout">Log Out</a>
-    <a href="dashboard">Dashboard</a>
-    <div class="quoteBox">
-        <h3>Quotable Quotes</h3>
-        {% for quote in allQuotes %}
-        {{quote.quoter}}: {{quote.message}}
-        <p>Posted by <a href=user/{{quote.poster.id}}>{{quote.poster.name}}</a></p>
-        <form action="/favorites/{{quote.id}}" method="POST">
-            {% csrf_token %}
-        <input type="submit" value="Add to Favorites">
-        <br>
-        {%if loggedinuser == quote.poster %}
-            <a href=/quotes/{{quote.id}}>Edit</a>
-            <a href=/delete/{{quote.id}}>Delete</a>
-        {% endif %}
-        </form>
-        <br>
-        <br>
-        {% endfor %}
+    <h1>Welcome, {{loggedinuser.name}}! </h1>
+    <div class="nav">
+        <a href="logout">Log Out</a>
+        <a href="dashboard">Dashboard</a>
     </div>
-    <div class="favBox">
-        <h3>Your Favorites</h3>
-        {% for quote in favoriteQuotes %}
-        {{quote.quoter}}: {{quote.message}}
-        <br> 
-        <br>
-        <p>Posted by <a href=user/{{quote.poster.id}}>{{quote.poster.name}}</a></p>
-        <form action="/removefavorites/{{quote.id}}" method="POST">
-            {% csrf_token %}
-        <input type="submit" value="Remove from Favorites">
-        <br>
-        {%if loggedinuser == quote.poster %}
-            <a href=/quotes/{{quote.id}}>Edit</a>
-            <a href=/delete/{{quote.id}}>Delete</a>
-        {% endif %}
-        </form>
-        <br>
-        <br>
-        <br>   
-        
-        {% endfor %}
-     
+
+    <div class="quoteBox" style="overflow-y:scroll" cellpadding="1">
+        <table>
+            <thead>
+                <th>Quotable Quotes</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> {% for quote in allQuotes %}
+                        <span style="font-weight: bold; font-size: 20px;">{{quote.quoter}}:</span> "{{quote.message}}"
+                        <p>Posted by <a href=user/{{quote.poster.id}}>{{quote.poster.name}} </a> </p> <form
+                                action="/favorites/{{quote.id}}" method="POST">
+                                {% csrf_token %}
+                                <input type="submit" value="Add to Favorites">
+                                <br>
+                                {%if loggedinuser == quote.poster %}
+                                <a href=/quotes/{{quote.id}}>Edit </a> <a href=/delete/{{quote.id}}>Delete </a>
+                                    {% endif %} </form> <br>
+                                    <br>
+                                    {% endfor %}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="favBox" style="overflow-y:scroll" cellpadding="1">
+        <table>
+            <thead>
+                <th>Favorite Quotes</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> {% for quote in favoriteQuotes %}
+                        <span style="font-weight: bold; font-size: 20px;">{{quote.quoter}}:</span> "{{quote.message}}"
+                        <br>
+                        <p>Posted by <a href=user/{{quote.poster.id}}>{{quote.poster.name}} </a> </p> <form
+                                action="/removefavorites/{{quote.id}}" method="POST">
+                                {% csrf_token %}
+                                <input type="submit" value="Remove from Favorites">
+                                <br>
+                                {%if loggedinuser == quote.poster %}
+                                <a href=/quotes/{{quote.id}}>Edit </a> <a href=/delete/{{quote.id}}>Delete </a>
+                                    {% endif %} </form> <br>
+                                    <br>
+
+                                    {% endfor %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
     </div>
     <div class="contributeBox">
-            {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
                 {% endfor %}
-            </ul>
-            {% endif %}
-        <p>Contribute a Quote</p>
-        
+        </ul>
+        {% endif %}
+        <span style="font-weight: bold; font-size: 40px; margin-top: 10px;">Post a Quote</span>
+        <br>
+        <br>
         <form action="/add_quote" method="POST">
             {% csrf_token %}
             Quoted By: <input type="text" name="quoter" id="">
             <br>
             <br>
-            Message: <input type="text" name="message" id="" style="width: 200px; align-content: top;">
+            Message: <input type="text" name="message" aria-rowcount="2" id="" style="width: 183px;">
             <br>
             <br>
             <input type="submit" value="Submit">
         </form>
-        
+
     </div>
 </body>
 
