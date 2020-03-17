@@ -14,5 +14,4 @@ urlpatterns = [
     path('quotes/<quote_id>', views.editQuote, name="editQuote"),
     path('edit/<quote_id>', views.updateQuote),
     path('delete/<quote_id>', views.deleteQuote),
-    path('cancel', views.cancelQuote)
 ] 
