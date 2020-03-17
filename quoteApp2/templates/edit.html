@@ -7,11 +7,39 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Edit Quote</title>
     <style>
+        body {
+            display: inline-block;
+            background-image: url(https://www.islands.com/resizer/vhfbdG_0jrqvgbxg_LhuilzvRzc=/1034x689/arc-anglerfish-arc2-prod-bonnier.s3.amazonaws.com/public/6PKCIYD2UANBKKJSXOBJ3K2TI4.jpg);
+            background-size: 100%;
+        }
+
         .messages {
             color: red;
         }
+
         a {
             margin-left: 30px;
+            vertical-align: top;
+            text-align: center;
+            background-color: #e2e5ea;
+            font-size: 20px;
+        }
+
+        .editBox {
+            text-align: center;
+            display: inline-block;
+            margin-bottom: 75px;
+            margin-left: 375px;
+            margin-right: 75px;
+            margin-top: 150px;
+            width: 400px;
+            border: solid;
+            padding: 15px;
+            background-color: #e2e5ea;
+        }
+        input {
+            display: inline;
+            vertical-align: bottom;
         }
     </style>
 </head>
@@ -26,10 +54,11 @@
     {% endif %}
     <a href="/">Log Out</a>
     <a href="/quotes">Dashboard</a>
-    <h2>Edit Quote</h2>
+
     <div class="editBox">
         <form action="/edit/{{quote.id}}" method="POST">
             {% csrf_token %}
+            <h2>Edit Quote</h2>
             <h3>Quoted By: <input type="text" name="quoter" id=""></h3>
             <br>
             <br>
@@ -37,9 +66,6 @@
             <br>
             <br>
             <input type="submit" value="Submit">
-        </form>
-        <form action="/cancel">
-            <input type="submit" value="Cancel" style="margin-right: 200px;">
         </form>
     </div>
 </body>
