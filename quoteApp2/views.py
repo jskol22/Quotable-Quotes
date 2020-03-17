@@ -91,9 +91,6 @@ def updateQuote(request, quote_id):
     quoteToEdit.save()
     return redirect("/quotes")
 
-def cancelQuote(request):
-    return redirect ("/quotes")
-
 def userQuotes(request, user_id):
     count = Quote.objects.filter(poster=user_id).count()
     user = User.objects.get(id=user_id)
